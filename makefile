@@ -21,17 +21,14 @@ $(YOCTO_SETUP_PATH): $(YOCTO_SETUP_SCRIPT)
 	chmod u+x $(YOCTO_SETUP_SCRIPT)
 	./$(YOCTO_SETUP_SCRIPT) -d"$(YOCTO_SETUP_PATH)" -y
 
-env_meta: $(META_PATH)
-	git clone -b $(YOCTO_VERSION_BRANCHNAME) --depth=1 https://github.com/Xilinx/meta-xilinx.git ./$(META_PATH)/meta-xilinx
-	git clone -b $(YOCTO_VERSION_BRANCHNAME) --depth=1 https://github.com/openembedded/meta-openembedded.git ./$(META_PATH)/meta-openembedded
-	git clone -b $(YOCTO_VERSION_BRANCHNAME) --depth=1 https://github.com/Xilinx/meta-xilinx-tools.git ./$(META_PATH)/meta-xilinx-tools
-	git clone -b $(YOCTO_VERSION_BRANCHNAME) --depth=1 https://github.com/jiangqucheng/meta-ebaz4205.git ./$(META_PATH)/meta-ebaz4205
+env: $(YOCTO_SETUP_PATH) 
+	git submodule update --init  # update the metas
+	# ln -s 
 
-env: $(YOCTO_SETUP_PATH) env_meta
 
-.PHONY: all env env_meta 
+.PHONY: all env 
 
 clean: 
 	-rm -rf $(YOCTO_SETUP_PATH)
-	-rm -rf $(META_PATH)/meta-xilinx $(META_PATH)/meta-openembedded $(META_PATH)/meta-xilinx-tools $(META_PATH)/meta-ebaz4205
+	# -rm -rf $(META_PATH)/meta-xilinx $(META_PATH)/meta-openembedded $(META_PATH)/meta-xilinx-tools $(META_PATH)/meta-ebaz4205
 
