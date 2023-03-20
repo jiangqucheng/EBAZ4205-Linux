@@ -1,0 +1,6 @@
+
+# where yocto place its environment
+opt/poky
+
+# yocto env install script, should wget from internet 
+*-buildtools-nativesdk-standalone-*.sh

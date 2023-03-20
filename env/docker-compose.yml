@@ -1,0 +1,40 @@
+version: '3'
+services:
+  work:
+    # image: eece7368_ubuntu_esl:latest
+    build: 
+      context: .
+      dockerfile: Dockerfile.work
+    ports:
+      - 8800:80  # zpanel
+    # ENV variables inside container. 
+    environment: 
+      # Default DISPLAY should goes to Docker HOST, which can be find inside containner using "host.docker.internal",
+      # or you can define it by yourself in .env file.
+      DISPLAY: ${DOCKER_HOST_IP:-host.docker.internal}:0.0 
+
+    # Volumes mounted from host to container.
+    volumes: 
+      # If the user account in container is not permitted to modify the workspace, 
+      # chmod -R 777 /workspace in dockerfile first before using it.
+      - ..:/workspace  # Give the container the directory of the whole project. CAUTION, This may do harm to the host file system
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw  # For display.
+
+    networks:
+      - net_internal
+
+    # deploy:
+      # resources:
+        # reservations:
+          # devices:
+            # - driver: nvidia
+              # count: 1
+              # capabilities: [gpu]
+          # memory: 2G
+    
+    # tty: true
+    command: tail -f /dev/null  # keep shell interactive
+
+networks:
+  net_internal:
+    name: net_internal
