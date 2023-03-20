@@ -5,6 +5,7 @@ YOCTO_SETUP_SCRIPT=x86_64-buildtools-nativesdk-standalone-$(YOCTO_VERSION).sh
 YOCTO_SETUP_PATH=./opt/poky/$(YOCTO_VERSION)
 
 META_PATH=meta
+META_LIST=$(patsubst $(META_PATH)/%,%,$(wildcard $(META_PATH)/meta-*))
 
 PROJ_MK_PATH+=$(META_PATH)
 
@@ -21,14 +22,16 @@ $(YOCTO_SETUP_PATH): $(YOCTO_SETUP_SCRIPT)
 	chmod u+x $(YOCTO_SETUP_SCRIPT)
 	./$(YOCTO_SETUP_SCRIPT) -d"$(YOCTO_SETUP_PATH)" -y
 
-env: $(YOCTO_SETUP_PATH) 
+poky/meta-%: $(META_PATH)/meta-%
+	ln -s ../$< $@
+
+env: $(YOCTO_SETUP_PATH) $(patsubst %,poky/%,$(META_LIST))
 	git submodule update --init  # update the metas
-	# ln -s 
 
 
 .PHONY: all env 
 
 clean: 
 	-rm -rf $(YOCTO_SETUP_PATH)
-	# -rm -rf $(META_PATH)/meta-xilinx $(META_PATH)/meta-openembedded $(META_PATH)/meta-xilinx-tools $(META_PATH)/meta-ebaz4205
+	-rm $(patsubst %,poky/%,$(META_LIST))
 

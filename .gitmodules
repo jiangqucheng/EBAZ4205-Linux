@@ -2,6 +2,7 @@
 	path = poky
 	url = git://git.yoctoproject.org/poky
 	branch = langdale
+	ignore = dirty
 [submodule "meta/meta-xilinx"]
 	path = meta/meta-xilinx
 	url = https://github.com/Xilinx/meta-xilinx.git
