@@ -1,22 +1,22 @@
 [submodule "poky"]
 	path = poky
 	url = git://git.yoctoproject.org/poky
-	branch = langdale
+	branch = zeus
 	ignore = dirty
-[submodule "meta/meta-xilinx"]
-	path = meta/meta-xilinx
-	url = https://github.com/Xilinx/meta-xilinx.git
-	branch = langdale
-[submodule "meta/meta-openembedded"]
-	path = meta/meta-openembedded
-	url = https://github.com/openembedded/meta-openembedded.git
-	branch = langdale
-[submodule "meta/meta-xilinx-tools"]
-	path = meta/meta-xilinx-tools
-	url = https://github.com/Xilinx/meta-xilinx-tools.git
-	branch = langdale
-[submodule "meta/meta-ebaz4205"]
-	path = meta/meta-ebaz4205
-	url = https://github.com/jiangqucheng/meta-ebaz4205.git
-	branch = langdale
+# [submodule "meta/meta-xilinx"]
+# 	path = meta/meta-xilinx
+# 	url = https://github.com/Xilinx/meta-xilinx.git
+# 	branch = zeus
+# [submodule "meta/meta-openembedded"]
+# 	path = meta/meta-openembedded
+# 	url = https://github.com/openembedded/meta-openembedded.git
+# 	branch = zeus
+# [submodule "meta/meta-xilinx-tools"]
+# 	path = meta/meta-xilinx-tools
+# 	url = https://github.com/Xilinx/meta-xilinx-tools.git
+# 	branch = rel-v2020.1
+# [submodule "meta/meta-ebaz4205"]
+# 	path = meta/meta-ebaz4205
+# 	url = https://github.com/jiangqucheng/meta-ebaz4205.git
+# 	branch = zeus
 
