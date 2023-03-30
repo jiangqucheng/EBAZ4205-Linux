@@ -34,7 +34,8 @@ USER ${user}
 RUN pwd \
 	&& apt-get update \
 	&& apt-get upgrade -y \
-	&& apt-get install -y cpio diffstat gawk  \
+	&& apt-get install -y cpio diffstat gawk python2.7  \
+	&& ln /usr/bin/python2.7 /usr/bin/python2 \
     && apt-get clean all  \
     && rm -r /var/lib/apt/lists/* 
 
