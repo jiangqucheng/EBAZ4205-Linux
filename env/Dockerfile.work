@@ -27,17 +27,21 @@ VOLUME /workspace
 WORKDIR /workspace
 RUN chmod -R 777 /workspace
 
-## Select user.
-USER ${user}
 
 # # SYSTEM-C LIB
 RUN pwd \
 	&& apt-get update \
 	&& apt-get upgrade -y \
-	&& apt-get install -y cpio diffstat gawk python2.7  \
+	&& apt-get install -y cpio diffstat gawk python2.7 chrpath texinfo locales \
 	&& ln /usr/bin/python2.7 /usr/bin/python2 \
+	&& locale-gen en_US.UTF-8 \
+	&& git config --global http.sslVerify false \
     && apt-get clean all  \
     && rm -r /var/lib/apt/lists/* 
+
+	
+## Select user.
+USER ${user}
 
 ## Other apt packages related to OpenGL.
 # apt-get install -y freeglut3-dev libglu1-mesa-dev libsoil-dev libglm-dev libassimp-dev libglew-dev libglfw3-dev libxinerama-dev libxcursor-dev libxi-dev libfreetype6-dev x11-apps mesa-utils
@@ -52,7 +56,7 @@ RUN pwd \
 
 ## add env exports
 # ENV LD_LIBRARY_PATH $LD_LIBRARY_PATH:/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/usr/lib/nvidia:/home/${user}/.mujoco/mujoco210/bin:/root/.mujoco/mujoco210/bin
-# ENV LANG C.UTF-8
+ENV LANG en_US.UTF-8
 # ENV MESA_GL_VERSION_OVERRIDE 3.3
 
 ## Add initialize script to container.
